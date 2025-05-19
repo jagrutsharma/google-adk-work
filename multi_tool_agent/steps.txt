@@ -1,0 +1,60 @@
+1. Start Server. Make sure you are in top-level folder and agent folders are visible.
+
+$ adk api_server
+
+2. In another terminal window, create a session:
+
+$ curl -X POST http://0.0.0.0:8000/apps/multi_tool_agent/users/u_123/sessions/s_123 \
+  -H "Content-Type: application/json" \
+  -d '{"state": {"key1": "value1", "key2": 42}}'
+
+3. Send a query (via run)
+
+curl -X POST http://0.0.0.0:8000/run \
+-H "Content-Type: application/json" \
+-d '{
+"app_name": "multi_tool_agent",
+"user_id": "u_123",
+"session_id": "s_123",
+"new_message": {
+    "role": "user",
+    "parts": [{
+    "text": "Hey whats the weather in new york today"
+    }]
+}
+}'
+
+4. Send a query (via run_sse, streaming = false)
+
+curl -X POST http://0.0.0.0:8000/run_sse \
+-H "Content-Type: application/json" \
+-d '{
+"app_name": "multi_tool_agent",
+"user_id": "u_123",
+"session_id": "s_123",
+"new_message": {
+    "role": "user",
+    "parts": [{
+    "text": "Hey whats the weather in new york today"
+    }]
+},
+"streaming": false
+}'
+
+
+5. Send a query (via run_sse, streaming = true)
+
+curl -X POST http://0.0.0.0:8000/run_sse \
+-H "Content-Type: application/json" \
+-d '{
+"app_name": "multi_tool_agent",
+"user_id": "u_123",
+"session_id": "s_123",
+"new_message": {
+    "role": "user",
+    "parts": [{
+    "text": "Hey whats the weather in new york today"
+    }]
+},
+"streaming": true
+}'
