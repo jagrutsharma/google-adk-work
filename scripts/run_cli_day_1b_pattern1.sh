@@ -6,4 +6,4 @@
 cd "$(dirname "$0")/.." || exit
 
 # Run CLI
-adk run agents/day_1a_single_agent_prompt_to_action
+adk run agents/day_1b_multi_agents_pattern1_llm_orchestrated
